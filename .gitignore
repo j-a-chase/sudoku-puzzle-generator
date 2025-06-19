@@ -1,0 +1,6 @@
+# ignore editor files
+.vscode/
+
+# ignore build files
+obj/
+puzzleGen
