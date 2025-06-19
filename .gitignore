@@ -4,3 +4,6 @@
 # ignore build files
 obj/
 puzzleGen
+
+# ignore generated files
+puzzles.txt
