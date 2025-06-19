@@ -59,7 +59,7 @@ re:
 	$(MAKE) clean
 	$(MAKE) all
 
-# run after recompiling
+# run after recompiling everything
 run: re
 	-./$(NAME)
 
@@ -74,6 +74,6 @@ debug: $(OBJ_DIR) $(NAME)
 	$(info DEBUGGING $(NAME))
 	gdb $(NAME)
 
-.PHONY: mostlyclean clean re run rerun test cleantest debug
+.PHONY: mostlyclean clean re run rerun debug
 .SILENT: 
 
