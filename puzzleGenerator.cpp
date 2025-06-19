@@ -9,7 +9,6 @@
 #include <fstream>
 #include <vector>
 #include <algorithm> // for std::shuffle
-#include <random> // for std::random_device
 
 using namespace std;
 
@@ -35,8 +34,8 @@ void PuzzleGenerator::generate() const {
 }
 
 array<int, 81> PuzzleGenerator::buildPuzzle(int minClues) const {
-   // create the empty puzzle
-   array<int, 81> puzzle;
+   // create the empty puzzle, initialized to zeros to prevent garbage values
+   array<int, 81> puzzle{};
 
    // randomly generate the puzzle
    randomize(puzzle);
@@ -44,7 +43,7 @@ array<int, 81> PuzzleGenerator::buildPuzzle(int minClues) const {
    // create vector of indices and shuffle
    vector<int> indices(81);
    iota(indices.begin(), indices.end(), 0); // Fill starting from 0 to 80
-   shuffle(indices.begin(), indices.end(), mt19937(random_device{}()));
+   shuffle(indices.begin(), indices.end(), rng);
 
    // fill the puzzle with valid numbers
    for (int index : indices) {
@@ -127,7 +126,7 @@ bool PuzzleGenerator::fillCell(array<int, 81>& puzzle, int index) const {
 
    // create possible numbers and shuffle selection
    vector<int> numbers{1,2,3,4,5,6,7,8,9};
-   shuffle(numbers.begin(), numbers.end(), mt19937(random_device{}()));
+   shuffle(numbers.begin(), numbers.end(), rng);
 
    for (int num : numbers) {
       if (isCellValid(puzzle, {row, col}, num)) {
